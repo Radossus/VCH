@@ -1,0 +1,92 @@
+:root {
+    --main-white: #fff;
+    --main-red: #be3144;
+    --main-blue: #007bff;
+    --main-gray: #23282d;
+    --bright-gray: #32373c;
+    --brighter-gray: #e1e1e1;
+}
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    background-color: #F8F8F8 !important;
+}
+
+
+h2, h3 {
+    color: var(--bright-gray);
+}
+
+#formLogin{
+    background-color: var(--main-gray);
+    margin: 1em auto;
+    border-radius: 7px;
+    max-width: 300px;
+    padding: 30px 50px 20px 50px;
+}
+
+#formLogin label{
+    color: var(--main-white);
+}
+
+.center{
+    text-align: center;
+}
+
+.formDefault{
+    background-color: var(--brighter-gray);
+  /*  margin: 3em auto; */
+    border-radius: 7px;
+  /*  max-width: 60em;  */
+    padding: 30px 50px 20px 50px;
+}
+
+.formDefault label{
+    color: var(--main-gray);
+}
+
+#adminHeader {
+    color: var(--main-white);
+    padding: 1em;
+    background-color: var(--main-gray);
+}
+
+.icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    margin-right: 1em;
+}
+
+.icon-white-svg {
+filter: invert(100%) sepia(73%) saturate(64%) hue-rotate(259deg) brightness(111%) contrast(88%);
+   /* filter: invert(9%) sepia(4%) saturate(2683%) hue-rotate(169deg) brightness(100%) contrast(85%); */
+    margin-top: 10px;
+    vertical-align: text-bottom;
+}
+
+
+#main-contend {
+    height: 100%;
+    /* background-color: var(--brighter-gray);
+      display: inline-block;
+      position: absolute;
+
+      margin-top: 2em;
+      margin-left: 15%;
+      padding-left: 20px;
+      padding-right: 20px;*/
+}
+
+#main-contend h1{
+    margin-bottom: 1em;
+}
+
+.bgPage{
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    border-radius: 6px 6px 6px 6px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

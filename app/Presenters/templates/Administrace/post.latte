@@ -1,0 +1,38 @@
+{block content}
+    <h1 n:block="title" class="text-secondary">Správa vaších příspěvků</h1>
+
+
+    <div class="pb-2"><a n:href="Post:editace" class="btn btn-primary p-1"><span data-feather="plus-circle"></span> Vložit nový příspěvek</a></div>
+
+    {if $posts->count() != 0}
+
+            <table class="table table-striped table-light table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Datum</th>
+                <th>Název</th>
+                <th>Kategorie</th>
+                <th>Schválení</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+        {foreach $posts as $post}
+            <tr>
+                <td>{$post->datum|date:'j. n. Y'}</td>
+                <td>{$post->nazev}</td>
+                <td>{$post->post_kategorie->jmeno}</td>
+                <td>{$post->schvaleni}</td>
+                <td><a n:href="Post:editace $post->id"><button type="button" class="btn btn-success"><span data-feather="edit"></span> Editovat</button></a></td>
+                <td><a n:href="Post:remove $post->id"><button type="button" class="btn btn-danger" onclick="return confirm('Opravdu chcete smazat termín?')"><span data-feather="minus-circle"></span> Smazat</button></a></td>
+            </tr>
+        {/foreach}
+            </tbody>
+            </table>
+    {else}
+        <div class="alert alert-primary" role="alert">
+            Nemáte vložený žádný příspěvek!
+        </div>
+    {/if}
+{/block}

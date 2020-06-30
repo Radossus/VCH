@@ -1,0 +1,89 @@
+{block content}
+
+<h1 n:block="title" class="text-secondary">{if $id} Editace {else} Vložení {/if} stránky </h1>
+
+<form n:name=editorStranka class="formDefault">
+    <div class="alert alert-danger" role="alert" n:if="$form->hasErrors()">
+        <span n:foreach="$form->errors as $error">{$error}</span>
+    </div>
+
+    <div class="form-group">
+        <label n:name=nazev class="">{label nazev}</label>
+        <input n:name=nazev class="form-control">
+    </div>
+    <div class="form-group">
+        <label n:name=obsah class="">{label obsah}</label>
+        <textarea n:name=obsah class="form-control"></textarea>
+    </div>
+    <!--
+    <div class="form-group">
+        <label n:name=uvodni class=""> </label>
+        <checkbox n:name=uvodni class=""></checkbox>
+    </div>
+    -->
+
+    <div class="form-group text-right">
+        <input n:name=send class="btn btn-primary">
+    </div>
+</form>
+<p><a n:href="Administrace:stranka">← zpět na výpis stránek</a></p>
+
+{block scripts}
+{include parent}
+    <script type="text/javascript" src="{$basePath}/js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea[name=obsah]',
+            language: 'cs',
+            convert_urls: false,
+            // automatic_uploads : false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste',
+                'image code'
+            ],
+
+            image_class_list: [{ title: 'Responsive', value: 'img-fluid' }],
+
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
+            entities: '160,nbsp',
+            entity_encoding: 'raw',
+
+            images_upload_handler : function(blobInfo, success, failure) {
+                var xhr, formData;
+
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', {$linkGenerator});
+                console.log('sdfasdf' + xhr);
+
+
+                xhr.onload = function() {
+                    var json;
+
+                    if (xhr.status != 200) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+                    console.log(xhr.responseText);
+                    json = JSON.parse(xhr.responseText);
+
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+
+                    success(json.location);
+                };
+
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                xhr.send(formData);
+            },
+        });
+
+    </script>
+
+{/block}

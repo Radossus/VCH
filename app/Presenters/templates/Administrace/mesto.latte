@@ -1,0 +1,40 @@
+{block content}
+    <h1 n:block="title" class="text-secondary">Správa měst</h1>
+
+
+    <div class="pb-2"><a n:href="MestoAdmin:editace" class="btn btn-primary p-1"><span data-feather="plus-circle"></span> Vložit nové město</a></div>
+
+    {if isset($mesta)}
+
+            <table class="table table-striped table-light table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Jméno města</th>
+                <th>Jméno uživatele</th>
+                <th>Url</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+        {foreach $mesta as $mesto}
+            <tr>
+                <td>{$mesto->mesto}</td>
+                <td>
+                    {foreach $mesto->related('user') as $u}
+                        {$u->name}
+                    {/foreach}
+                </td>
+                <td>{$mesto->url}</td>
+                <td><a n:href="MestoAdmin:editace $mesto->id"><button type="button" class="btn btn-success"><span data-feather="edit"></span> Editovat</button></a></td>
+                <td><a n:href="MestoAdmin:remove $mesto->id"><button type="button" class="btn btn-danger" onclick="return confirm('Opravdu chcete smazat termín?')"><span data-feather="minus-circle"></span> Smazat</button></a></td>
+            </tr>
+        {/foreach}
+            </tbody>
+            </table>
+    {else}
+        <div class="alert alert-primary" role="alert">
+            Žádné město neexistuje!
+        </div>
+    {/if}
+{/block}

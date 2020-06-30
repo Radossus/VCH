@@ -1,0 +1,34 @@
+{block content}
+	<div id="mestoStrana">
+		<h5 n:block="title">{$jmenoMesta}</h5>
+
+		<div class="row">
+			<div class="col-9">
+			{if $stranaMesta}
+				<p>{$stranaMesta->obsah|noescape}</p>
+			{/if}
+
+			{if $terminy}
+				<h2>Nadcházející termíny:</h2>
+				{foreach $terminy as $termin}
+					<p>{$termin->datum|date:'j. n. Y H.i'} hod.</p>
+					<p>{$termin->tema|noescape}</p>
+					<p>{$termin->kde}</p>
+				{/foreach}
+			{else}
+				<strong>Nejsou vypsané žádné nové termíny</strong>
+			{/if}
+			</div>
+
+			<div class="col-3">
+			{if $stranky_mesta}
+				<ul>
+				{foreach $stranky_mesta as $stranka}
+					<li><a href="{link Homepage:mesto $urlMesta, $stranka->url}">{$stranka->nazev}</a></li>
+				{/foreach}
+				</ul>
+			{/if}
+			</div>
+		</div>
+	</div>
+{/block}

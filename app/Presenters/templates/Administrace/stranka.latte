@@ -1,0 +1,25 @@
+{block content}
+    <h1 n:block="title" class="text-secondary">Správa vaších stránek</h1>
+
+
+    <div class="pb-2"><a n:href="StrankaMesta:editace" class="btn btn-primary p-1"><span data-feather="plus-circle"></span> Založit novou stránku</a></div>
+
+    {if $stranky}
+        {foreach $stranky as $stranka}
+        <div class="card mt-3 mb-2">
+            <div class="card-header bg-dark text-white">
+                <h5>{$stranka->nazev}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{$stranka->obsah|noescape}</p>
+                <a n:href="StrankaMesta:editace $stranka->id" class="btn btn-success"><span data-feather="edit"></span> Editovat</a>
+                <a n:href="StrankaMesta:remove $stranka->id" class="btn btn-danger " onclick="return confirm('Opravdu chcete smazat termín?')"><span data-feather="minus-circle"></span> Smazat</a>
+            </div>
+        </div>
+        {/foreach}
+    {else}
+        <div class="alert alert-primary" role="alert">
+            Nemáte vytvořenou žádnou stránku!
+        </div>
+    {/if}
+{/block}

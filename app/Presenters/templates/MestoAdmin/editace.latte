@@ -1,0 +1,106 @@
+{block content}
+
+<h1 n:block="title" class="text-secondary">{if $id} Editace {else} Vložení {/if} města </h1>
+
+<form n:name=editorMesto class="formDefault">
+
+    <div class="alert alert-danger" role="alert" n:if="$form->hasErrors()">
+        <span n:foreach="$form->errors as $error">{$error}</span>
+    </div>
+    <div class="form-group">
+        <label n:name=mesto class="">{label mesto}</label>
+        <input n:name=mesto class="form-control w-25">
+    </div>
+    {if $id}
+    <div class="form-group">
+        <label n:name=url class="">{label url} </label><span class="text-danger"> (nesmí obsahovat diakritiku a mezery)</span>
+        <input n:name=url class="form-control w-25">
+    </div>
+    {/if}
+
+    <div class="form-group">
+        <label n:name=left_position class="">{label left_position} </label><span class="text-danger"> (souřadnici nastavíte kliknutím na mapu níže)</span>
+        <input n:name=left_position class="form-control w-25">
+    </div>
+
+    <div class="form-group">
+        <label n:name=top_position class="">{label top_position}</label><span class="text-danger"> (souřadnici nastavíte kliknutím na mapu níže)</span>
+        <input n:name=top_position class="form-control w-25">
+    </div>
+
+    <div class="form-group text-right">
+        <input n:name=send class="btn btn-primary mt-5">
+    </div>
+</form>
+
+<div class="text-center mt-5">
+    <button id="btnshow" class="btn btn-success">Zobrazit mapu ČR</button>
+    <button id="btnhide" class="btn btn-danger">Schovat mapu ČR</button>
+</div>
+<div class="map bgPage" id="map">
+    <img src="{$basePath}/img/mapa_over.png" id="mapOver">
+    <img src="{$basePath}/img/mapa.png" class="map">
+    <div class="mapMesto" style='top: {$top_position}%;left: {$left_position}%;'>
+        <a href="#">
+            <i data-feather="map-pin" class="map-pin" style="color: black !important;"></i>
+            <!-- <img src="{$basePath}/img/kolecko.png"></a> -->
+        <a>
+    </div>
+</div>
+
+<p><a n:href="Administrace:mesto">← zpět na výpis příspěvků</a></p>
+
+<script>
+    function show(id) {
+        document.getElementById(id).style.visibility = "visible";
+    }
+    function hide(id) {
+        document.getElementById(id).style.visibility = "hidden";
+    }
+
+    $("#mapOver").hide();
+    $("#btnhide").hide();
+    $("#btnhide").click(function(){
+        $("#mapOver").hide();
+        $("#btnshow").show();
+        $("#btnhide").hide();
+    });
+    $("#btnshow").click(function(){
+        $("#mapOver").show();
+        $("#btnshow").hide();
+        $("#btnhide").show();
+    });
+
+    let map = document.getElementById("map");
+    map.onclick = showCoords;
+
+
+    function showCoords(e)
+    {
+        var map = e.target.getBoundingClientRect();
+
+        var x = e.offsetX; //souradnice relativni pozice X / zleva
+        var y = e.offsetY; //souradnice relativni pozice Y /zhora
+        var mapWidth = $("#map").width(); //relativni sirka mapy
+        var mapHeight = $("#map").height(); //relativni vyska mapy
+        var resultX = parseInt((x/mapWidth)*100);
+        var resultY = parseInt((y/mapHeight)*100);
+
+        console.log("left: "+x+" "+"top: "+y );
+        console.log("left%: "+ resultX +" top%: "+ resultY);
+
+        $(".mapMesto").css("top", resultY+"%");
+        $(".mapMesto").css("left", resultX+"%");
+
+        document.getElementById("frm-editorMesto-left_position").value = resultX;
+        document.getElementById("frm-editorMesto-top_position").value = resultY;
+    }
+
+    $("#pic").change(function() {
+        filename = this.files[0].name;
+        console.log(this.files);
+        $('#showPic').text('vložený obrázek: '+ filename);
+        $('#showPic').addClass('alert alert-warning');
+        //   $('#showPic1').append("<button type=\"button\" class=\"btn btn-danger ml-3 mb-1\">Smazat</button>");
+    });
+</script>

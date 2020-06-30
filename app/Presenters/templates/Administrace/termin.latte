@@ -1,0 +1,32 @@
+{block content}
+    <h1 n:block="title" class="text-secondary">Správa termínu</h1>
+
+
+    <div class="pb-2"><a n:href="Termin:editace" class="btn btn-primary p-1"><span data-feather="plus-circle"></span> Vložit nový termín</a></div>
+    {if $terminy}
+    <table class="table table-striped table-light table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Datum a čas</th>
+            <th>Místo konání</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $terminy as $termin}
+        <tr>
+            <td>{$termin->datum|date:'j. n. Y H:i'}</td>
+            <td>{$termin->kde}</td>
+            <td><a n:href="Termin:editace $termin->id"><button type="button" class="btn btn-success"><span data-feather="edit"></span> Editovat</button></a></td>
+            <td><a n:href="Termin:remove $termin->id"><button type="button" class="btn btn-danger" onclick="return confirm('Opravdu chcete smazat termín?')"><span data-feather="minus-circle"></span> Smazat</button></a></td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {else}
+        <div class="alert alert-primary" role="alert">
+            Nemáte vypsaný žádný termín!
+        </div>
+    {/if}
+{/block}

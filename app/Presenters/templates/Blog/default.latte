@@ -1,0 +1,39 @@
+{block content}
+
+    <div class="w-100 p-3 bgPage">
+        <h1 n:block="title"><span data-feather="book-open" class="feather-1"></span> Blog</h1>
+    </div>
+
+    <div>
+        {if $blogPosts}
+            <div class="row">
+
+                {foreach $blogPosts as $post}
+                    <div class="col-sm-6 col-lg-4 py-2">
+                        <div class="card bgCard h-100" style="display:none">
+                            <img class="card-img-top cardImage" src="{$basePath}/upload/post/intro_pic/{$post->pic}">
+                            <div class="card-body">
+                                <h5 class="card-title">{$post->nazev}</h5>
+                                <p class="card-text">{$post->obsah|noescape|truncate:100}</p>
+                                <a n:href="Blog:post, $post->url" class="btn btn-primary">Číst více</a>
+                            </div>
+                        </div>
+                     </div>
+                {/foreach}
+
+            </div>
+        {/if}
+
+    </div>
+
+
+<script type="text/javascript" >
+$(document).ready(function () {
+        $(".card").delay("slow").fadeIn()
+    	console.log("stranka se nacetla.");
+});
+
+</script>
+{/block}
+
+

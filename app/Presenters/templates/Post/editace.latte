@@ -1,0 +1,143 @@
+{block content}
+
+<h1 n:block="title" class="text-secondary">{if $id} Editace {else} Vložení {/if} příspěvku </h1>
+
+<form n:name=editorPost class="formDefault">
+    {if $id}
+        <div class="form-group">
+            {if $schvaleni == "Čeká na schválení"}
+                <div class="form-control w-25 bg-primary text-white">{$schvaleni}</div>
+            {elseif $schvaleni == "Schváleno"}
+                <div class="form-control w-25 bg-success text-white">{$schvaleni}</div>
+            {else}
+                <div class="form-control w-25 bg-danger text-white">{$schvaleni}</div>
+            {/if}
+        </div>
+    {/if}
+    <div class="alert alert-danger" role="alert" n:if="$form->hasErrors()">
+        <span n:foreach="$form->errors as $error">{$error}</span>
+    </div>
+    <div class="form-group">
+        <label n:name=datum class="">{label datum}</label>
+        <input n:name=datum class="form-control w-25">
+    </div>
+
+    <div class="form-group">
+        <label n:name=autor class="">{label autor}</label>
+        <input n:name=autor class="form-control w-25">
+    </div>
+
+    <div class="form-group">
+        <label n:name=kategorie class="">{label kategorie}</label>
+        <select n:name=kategorie class="form-control w-25"></select>
+    </div>
+
+    <div class="form-group">
+        <label n:name=nazev class="">{label nazev}</label>
+        <input n:name=nazev class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label n:name=obsah class="">{label obsah}</label>
+        <textarea n:name=obsah class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-file">
+            <p>Zde můžete vložit tématický obrázek, pokud nevložíte váš vlastní, bude nastavený výchozí obrázek. Obrázek by měl mít rozměr cca 390x260px.</p>
+            <label for="pic" class="btn btn-success text-white">Vyberte obrázek</label>
+            <input n:name=pic id="pic" style="visibility:hidden; width: 1px" >
+            <span id="showPic">
+                <span n:tag-if="$pic">
+                    {if $pic}
+                            <img src="{$basePath}/upload/post/intro_pic/{$pic}" height="200"> <a n:href="Post:removeIntroPic $id, $pic" class="btn btn-danger ml-3 mb-1">Smazat obrázek</a>
+                    {/if}
+                </span>
+            </span>
+        </div>
+    </div>
+    {if $pic}
+    {/if}
+    <div class="form-group text-right mt-5">
+        <input n:name=send class="btn btn-primary mt-5">
+    </div>
+</form>
+<p><a n:href="Administrace:post">← zpět na výpis příspěvků</a></p>
+
+
+<script>
+    $(document).ready(function() {
+        document.getElementById("frm-editorPost-datum").flatpickr({
+            locale: "cs",
+            dateFormat: "j. n. Y"
+        });
+
+    });
+
+    $("#pic").change(function() {
+        filename = this.files[0].name;
+        console.log(this.files);
+        $('#showPic').text('vložený obrázek: '+ filename);
+        $('#showPic').addClass('alert alert-warning');
+        //   $('#showPic1').append("<button type=\"button\" class=\"btn btn-danger ml-3 mb-1\">Smazat</button>");
+    });
+</script>
+
+
+
+{block scripts}
+{include parent}
+    <script type="text/javascript" src="{$basePath}/js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea[name=obsah]',
+            language: 'cs',
+            convert_urls: false,
+            // automatic_uploads : false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste',
+                'image code'
+            ],
+
+            image_class_list: [{ title: 'Responsive', value: 'img-fluid' }],
+
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
+            entities: '160,nbsp',
+            entity_encoding: 'raw',
+
+            images_upload_handler : function(blobInfo, success, failure) {
+                var xhr, formData;
+
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', {$linkGenerator});
+
+                xhr.onload = function() {
+                    var json;
+
+                    if (xhr.status != 200) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+                    console.log(xhr.responseText);
+                    json = JSON.parse(xhr.responseText);
+
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+
+                    success(json.location);
+                };
+
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                xhr.send(formData);
+            },
+        });
+    </script>
+
+{/block}

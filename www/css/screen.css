@@ -1,0 +1,357 @@
+@import url('../bootstrap/css/bootstrap.min.css');
+:root {
+    --main-white: #f0f0f0;
+    --main-red: #be3144;
+    --main-blue: #004A75;
+    --main-gray: #23282d;
+    --bright-gray: #32373c;
+    --link: #b8daff;
+    --third-color: #b7be04;
+}
+
+/* Base reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+   /* margin-bottom: 0.5em !important; */
+}
+
+p {
+    font-size: 1.1em;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background: url("../img/mainbg.png") no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+   /* overflow: hidden; */
+}
+
+#logo{
+    display: inline-block;
+    height: 4em;
+    margin: 0em;
+    padding: 0em;
+
+}
+.navbar-nav{
+  /*  background-color: var(--third-color);
+    border-radius: 3px 3px; */
+}
+
+ul.nav li a, ul.nav li a:visited {
+    color: var(--main-white) !important;
+    font-size: 1.4em;
+   /* margin-left: 0.1em; */
+    border-radius: 0px 10px;
+}
+
+ul.nav li a:hover, ul.nav li a:active {
+   /* background-color: rgba(255,183,7,0.8); /* Black w/opacity/see-through */
+   /* background-color: rgba(0,0,0,0.4); /* Black w/opacity/see-through */
+    background-color: var(--third-color);
+}
+
+ul.nav li.active a {
+   /* color: var(--main-white) !important; */
+}
+
+#banner{
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    padding: 0px 5px 0px 0px;
+    border-radius: 2px 50px 2px 50px;
+}
+
+#banner a:link {
+    color: var(--link) !important;
+    text-decoration: none;
+}
+
+/* visited link */
+#banner a:visited {
+    color: var(--link) !important;
+}
+
+/* mouse over link */
+#banner a:hover {
+    color: var(--third-color) !important;
+    text-decoration: none !important;
+    padding-left: 5px;
+}
+
+/* selected link */
+#banner a:active {
+    color: var(--link) !important;
+}
+
+.bgPage a:link {
+    color: var(--link) !important;
+    text-decoration: none;
+}
+
+/* visited link */
+.bgPage a:visited {
+    color: var(--link) !important;
+}
+
+/* mouse over link */
+.bgPage a:hover {
+    color: var(--main-white) !important;
+    text-decoration: none !important;
+}
+
+/* selected link */
+.bgPage a:active {
+    color: var(--link) !important;
+}
+
+
+.carousel-inner {
+    border-radius: 2px 0px 0px 50px;
+  /*  background-color: rgba(0,0,0,0); */
+    overflow: hidden;
+}
+
+#banner-column{
+    padding-top: 1em;
+}
+
+#banner-column-title{
+    font-size:1.5vw;
+}
+
+#banner-column ul {
+    padding-left: 1.3em;
+    margin-top: 1em;
+}
+
+#banner-column li {
+    font-size:1.2vw;
+}
+
+
+#formLogin{
+    background-color: var(--main-gray);
+     margin: 3em auto;
+     border-radius: 7px;
+     max-width: 300px;
+     padding: 30px 50px 20px 50px;
+}
+
+#formLogin label{
+    color: var(--main-white);
+}
+
+.center{
+    text-align: center;
+}
+
+#main-contend{
+    color: var(--main-white);
+}
+
+#mestoStrana .card-header{
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+#mestoStrana .car-body{
+
+}
+
+.bgPage{
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 1em;
+}
+
+.card-columns {
+    column-count: 3;
+}
+
+.cardImage{
+    height: 15rem;
+}
+
+.bgCard{
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    border: 0px;
+}
+
+#mestoStrana h1{
+
+}
+
+#mestoStrana #termin{
+    background-color: rgba(0,0,0, 0.4);
+}
+
+.feather-1{
+    width: 0.8em;
+    height: 0.8em;
+}
+
+
+.responsive-iframe {
+    /*position: absolute;*/
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+
+/* prtave mobily */
+@media (max-width: 320px) {
+    #banner-column li {
+        font-size: 1em;
+    }
+
+    #banner-column ul {
+        padding-left: 3em;
+    }
+
+    #banner-column-title{
+        font-size: 120%;
+        padding-left: 10px;
+    }
+
+    #banner {
+        background-color: unset;
+    }
+
+    .cardImage{
+        height: 10rem;
+    }
+
+}
+
+
+
+
+/* mobily */
+@media (min-width: 321px) and (max-width: 424px) {
+    /* Medium screen, non-retina */
+    ul.nav li a, ul.nav li a:visited {
+        font-size: 1.2em;
+        padding-left: 3px;
+    }
+
+    ul.nav li a:hover, ul.nav li a:active {
+        padding-left: 3px;
+        font-size: 1.2em
+    }
+    #banner {
+        background-color: unset;
+    }
+
+    #banner-column-title{
+        font-size: 120%;
+        padding-left: 10px;
+    }
+
+    #banner-column li {
+        font-size: 1em;
+    }
+
+    #banner-column ul {
+        padding-left: 3em;
+    }
+
+    .cardImage{
+        height: 13rem;
+    }
+
+}
+
+
+@media only screen and (min-width: 425px) and (max-width: 537px) {
+    ul.nav li a, ul.nav li a:visited {
+        font-size: 1.2em;
+        padding-left: 2.5px;
+    }
+
+    ul.nav li a:hover, ul.nav li a:active {
+        padding-left: 2.5px;
+        font-size: 1.2em
+    }
+    #banner {
+        background-color: unset;
+    }
+
+    #banner-column-title{
+        font-size: 120%;
+        padding-left: 10px;
+    }
+
+
+    #banner-column li {
+        font-size: 1em;
+    }
+
+    #banner-column ul {
+        padding-left: 3em;
+    }
+
+}
+
+
+@media /*tablety */
+only screen and (min-width: 538px) and (max-width: 768px) {
+
+
+    ul.nav li a, ul.nav li a:visited {
+        font-size: 3em;
+        padding-left: 3px;
+        font-size: 1.2em;
+    }
+
+    ul.nav li a:hover, ul.nav li a:active {
+        padding-left: 3px;
+        font-size: 1.2em;
+    }
+
+    #banner-column-title{
+        font-size: 100%;
+    }
+
+    #banner-column li {
+        font-size:1.8vw;
+    }
+    .cardImage{
+        height: 10rem;
+    }
+
+}
+@media
+only screen and (min-width: 769px) {
+
+    #banner-column li {
+        font-size:1.2vw;
+    }
+
+    ul.nav li a, ul.nav li a:visited {
+        font-size: 1.5em;
+        padding-left: 1px;
+    }
+
+    ul.nav li a:hover, ul.nav li a:active {
+        padding-left: 1px;
+    }
+
+    #banner-column-title{
+        font-size: 150%;
+    }
+
+    .cardImage{
+        height: 14rem;
+    }
+}
+

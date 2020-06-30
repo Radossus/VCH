@@ -1,0 +1,47 @@
+{block content}
+
+	<div class="w-100 p-3 bgPage">
+		 <h1 n:block="title"><span data-feather="map" class="feather-1"></span> Mapa měst</h1>
+	</div>
+	<div class="bgPage">
+		<div class="map">
+			<img src="{$basePath}/img/mapa.png" class="map">
+
+		{foreach $mestaAkce as $mestoAkce}
+			{if $mestoAkce[top_position] AND $mestoAkce[left_position]}
+
+				<p class="map-pinMesto" style='top: {$mestoAkce[top_position]}%;left: {$mestoAkce[left_position]+3}%;' id="{$mestoAkce[url]}">
+					{$mestoAkce[mesto]}
+				</p>
+				{if $mestoAkce[akce] == True}
+					<a href="{link Mesto:mesto $mestoAkce[url]}"">
+					<p onMouseOver="show({$mestoAkce[url]})" onMouseOut="hide({$mestoAkce[url]})"><i data-feather="map-pin" class="map-pin map-pin-action" style='top: {$mestoAkce[top_position]}%;left: {$mestoAkce[left_position]}%;'></i></p>
+					</a>
+				{else}
+					<a href="{link Mesto:mesto $mestoAkce[url]}"">
+					<p onMouseOver="show({$mestoAkce[url]})" onMouseOut="hide({$mestoAkce[url]})"><i data-feather="map-pin" class="map-pin" style='top: {$mestoAkce[top_position]}%;left: {$mestoAkce[left_position]}%;'></i></p>
+					</a>
+				{/if}
+			{/if}
+		{/foreach}
+
+		</div>
+	</div>
+	<div class="w-100 p-3 bgPage">
+		<h2><span data-feather="list" class="feather-1"></span> Seznam všech míst</h2>
+		{foreach $mesta as $mesto}
+			<a n:href="Mesto:mesto $mesto->url"><button type="button" class="btn btn-info m-1">{$mesto->mesto}</button></a>
+		{/foreach}
+	</div>
+	
+<script>
+  function show(id) {
+    document.getElementById(id).style.display = "block";
+  }
+  function hide(id) {
+    document.getElementById(id).style.display= "none";
+  }
+</script>
+	
+
+{/block}

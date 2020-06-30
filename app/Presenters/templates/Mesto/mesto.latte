@@ -1,0 +1,54 @@
+{block content}
+	<div id="mestoStrana">
+		<div class="row">
+			<div class="w-100 p-3 bgPage">
+				<h1  n:block="title" ><span data-feather="map-pin" style="margin-top: -7px;" class="feather-1"></span> {$jmenoMesta}</h1>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-9 bgPage p-5" id="termin">
+			{if $stranaMesta}
+				<h2>{$stranaMesta->nazev}</h2>
+				<p>{$stranaMesta->obsah|noescape}</p>
+			{/if}
+
+
+			{if $terminy}
+
+
+				<h2><span data-feather="calendar" style="margin-top: -10px;"></span> Nadcházející termíny: </h2>
+
+				{foreach $terminy as $termin}
+					<div class="card bg-primary mb-3 mb-3 mb-3">
+						<div class="card-header">
+								<span data-feather="calendar" style="margin-top: -5px;"></span> {$termin->datum|date:'j. n. Y'} <span class="float-right"><span data-feather="clock" style="margin-top: -5px;"></span> {$termin->datum|date:'H:i'} hod.</span>
+						</div>
+						{if $termin->kde}
+						<div class="card-body">
+							<div class="card-text">
+							{$termin->tema|noescape}
+								<span class="mt-3"><span data-feather="map-pin" style="margin-top: -7px;"></span> {$termin->kde}</span>
+							</div>
+						</div>
+						{/if}
+					</div>
+				{/foreach}
+			{else}
+				<strong>Nejsou vypsané žádné nové termíny</strong>
+			{/if}
+			</div>
+
+			<div class="col-md-3">
+			{if $stranky_mesta}
+				<ul>
+				{foreach $stranky_mesta as $stranka}
+					<a href="{link Mesto:mesto $urlMesta, $stranka->url}" class="btn btn-light btn-block btn-lg" role="button">{$stranka->nazev}</a>
+				{/foreach}
+				</ul>
+			{/if}
+			</div>
+		</div>
+	</div>
+{/block}

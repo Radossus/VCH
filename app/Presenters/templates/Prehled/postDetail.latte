@@ -1,0 +1,46 @@
+{block content}
+
+{if $user->isInRole('superadmin')}
+
+<div class="card mt-3 mb-2">
+    <div class="card-header bg-dark text-white">
+        <h1 n:block="title" class="text-white">{$post->nazev}</h1>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>Datum: {$post->datum|date:'j. n. Y'}</div>
+            <div>Autor: {$post->autor}</div>
+            <div>Kategorie: {$post->kategorie->jmeno}</div>
+            <div>Vložil užívatel: {$post->user} z {$post->mesto->mesto}</div>
+            <div class="">Stav: {$post->schvaleni} </div>
+            {if $post->pic}
+                <img scr="{$basePath}/upload/post/intro_pic/"{$post->pic}
+            {/if}
+            <div>
+                {$post->obsah|noescape}
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            {if $post->schvaleni == 'Čeká na schválení'}
+                <a n:href="Prehled:postAno $post->id" class="btn btn-success"><span data-feather="edit"></span> Schválit</a>
+                <a n:href="Prehled:postNe $post->id" class="btn btn-danger " onclick="return confirm('Opravdu chcete příspěvek zamítnout?')"><span data-feather="minus-circle"></span> Zamítnout</a>
+            {elseif $post->schvaleni == 'Schváleno'}
+                <a n:href="Prehled:postNe $post->id, $postSchvaleniId['id']" class="btn btn-danger " onclick="return confirm('Opravdu chcete příspěvek zamítnout?')"><span data-feather="minus-circle"></span> Zamítnout</a>
+            {else}
+                <a n:href="Prehled:postAno $post->id, $postSchvaleniId['id']" class="btn btn-success"><span data-feather="edit"></span> Schválit</a>
+            {/if}
+        </div>
+    </div>
+
+</div>
+    <p><a n:href="Administrace:prehled">← zpět na celkový přehled</a></p>
+
+
+
+
+
+
+
+
+{/if}
+

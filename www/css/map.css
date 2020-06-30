@@ -1,0 +1,174 @@
+:root {
+    --main-white: #f0f0f0;
+    --main-red: #be3144;
+    --main-blue: #004A75;
+    --main-gray: #23282d;
+    --bright-gray: #32373c;
+    --third-color: #b7be04;
+}
+
+.map {
+  /*  display: block; */
+    width: 100%;
+    height: auto;
+    background-size: 100%;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+#mapOver {
+    opacity: 90%;
+    width: 100%;
+    height: auto;
+    background-size: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
+.mapMesto{
+    position: absolute;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 3;
+}
+
+.mapMesto span{
+    vertical-align: middle;
+    line-height: 17px;
+    padding-right: 10px;
+    text-shadow: 0px 0px 2px #000;
+    visibility: hidden;
+    white-space: nowrap;
+}
+/*
+.mapMesto a{
+    color: black;
+    text-decoration: none;
+}
+
+.mapMesto a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.mapMesto img{
+
+    margin-right: 0px;
+    padding: 0px;
+} */
+@keyframes Map-pin-animation {
+    0%   {color: var(--third-color); }
+    100%  {color: red; width: 1.8em; height: 1.8em}
+}
+
+.map-pin-action {
+    animation-name: Map-pin-animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+.map-pin {
+    color: var(--third-color);
+    position: absolute;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 3;
+    display: block;
+}
+
+.map-pin:hover{
+    color: var(--main-blue) !important;
+    width: 1.5em;
+    height: 1.5em;
+    display: block;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+}
+
+.map-pinMesto{
+    color: var(--main-blue) !important;
+    background-color: white;
+    margin-top: -10px;
+    vertical-align: middle;
+    position: absolute;
+    line-height: 17px;
+    padding: 10px;
+    /*text-shadow: 0px 0px 2px #000; */
+    display: none;
+    white-space: nowrap;
+    z-index: 99;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.mapMestoAkce{
+  height: 25px;
+  width: 25px;
+}
+
+
+.mapMestoPopisek{
+    padding-bottom: 0px;
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    width: auto;
+   /* visibility: visible; */
+    /*float: right; */
+}
+
+/* prtave mobily */
+@media (max-width: 538px) {
+    .map-pin{
+        width: 0.7em;
+        height: 0.7em;
+    }
+
+    .map-pin:hover{
+        width: 0.7em;
+        height: 0.7em;
+    }
+
+    .map-pinMesto{
+        padding: 2px;
+        border-radius: 0px;
+    }
+
+    @keyframes Map-pin-animation {
+        0%   {color: var(--third-color); }
+        100%  {color: red; width: 1em; height: 1em}
+    }
+}
+/* mobily */
+@media only screen and (min-width: 321px) and (max-width: 538px) {
+    .map-pin{
+        width: 0.7em;
+        height: 0.7em;
+    }
+
+    .map-pin:hover{
+        width: 0.7em;
+        height: 0.7em;
+    }
+
+    .map-pinMesto{
+        padding: 2px;
+        border-radius: 0px;
+    }
+
+
+    @keyframes Map-pin-animation {
+        0%   {color: var(--third-color); }
+        100%  {color: red; width: 1em; height: 1em}
+    }
+}

@@ -1,0 +1,91 @@
+{block content}
+<h1 n:block="title" class="text-secondary">Přehled schválování</h1>
+{if $terminyPrehled}
+    <div class="alert alert-info"><h5>Přehled schválených/neschválených termínů</h5></div>
+
+    <table class="table table-striped table-light table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Datum a čas</th>
+            <th>Město</th>
+            <th>Místo konání</th>
+            <th>Stav</th>
+            <th>Schvalovatel</th>
+            <th>Datum schválení/zamítnutí</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $terminyPrehled as $prehled}
+            <tr>
+                    <td>{$prehled->termin->datum|date:'j. n. Y H:i'}</td>
+                    <td>{$prehled->termin->mesto->mesto}</td>
+                    <td>{$prehled->termin->kde}</td>
+                    <td {if $prehled->termin->schvaleni == 'Schváleno'} class="text-success"
+                    {else}
+                        class="text-danger"
+                    {/if}
+                        >{$prehled->termin->schvaleni}</td>
+                    <td>{$prehled->schvalovatel}</td>
+                    <td>{$prehled->datum|date:'j. n. Y H:i'}</td>
+                    <td>
+                        {if $prehled->termin->schvaleni == 'Neschváleno'}
+                            <a n:href="Prehled:terminAno $prehled->termin->id, $prehled->id" class="btn btn-success"><span data-feather="edit"></span> Schválit</a>
+                        {else}
+                            <a n:href="Prehled:terminNe $prehled->termin->id, $prehled->id" class="btn btn-danger " onclick="return confirm('Opravdu chcete příspěvek zamítnout?')"><span data-feather="minus-circle"></span> Zamítnout</a>
+                        {/if}
+
+                    </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+{else}
+    <div class="alert alert-success"><h3>Žádný termín neprošel schvalováním</h3></div>
+{/if}
+
+{if $postPrehled}
+    <div class="alert alert-info"><h5>Přehled schválených/neschválených příspěvků</h5></div>
+
+    <table class="table table-striped table-light table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th>Datum</th>
+        <th>Název</th>
+        <th>Kategorie</th>
+        <th>Autor</th>
+        <th>Stav</th>
+        <th>Schvalovatel</th>
+        <th>Datum schválení/zamítnutí</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $postPrehled as $prehled}
+        <tr>
+            <td>{$prehled->post->datum|date:'j. n. Y'}</td>
+            <td>{$prehled->post->nazev}</td>
+            <td>{$prehled->post->kategorie->jmeno}</td>
+            <td>{$prehled->post->autor}</td>
+            <td {if $prehled->post->schvaleni == 'Schváleno'} class="text-success"
+                {else}
+                    class="text-danger"
+                {/if}
+            >{$prehled->post->schvaleni}</td>
+            <td>{$prehled->schvalovatel}</td>
+            <td>{$prehled->datum|date:'j. n. Y H:i'}</td>
+            <td><a n:href="Prehled:postDetail $prehled->post->id" class="btn btn-info"><span data-feather="eye"></span> Prohlédnout</a>
+                {if $prehled->post->schvaleni == 'Neschváleno'}
+                    <a n:href="Prehled:postAno $prehled->post->id, $prehled->id" class="btn btn-success"><span data-feather="edit"></span> Schválit</a>
+                {else}
+                    <a n:href="Prehled:postNe $prehled->post->id, $prehled->id" class="btn btn-danger " onclick="return confirm('Opravdu chcete příspěvek zamítnout?')"><span data-feather="minus-circle"></span> Zamítnout</a>
+                {/if}
+            </td>
+        </tr>
+    {/foreach}
+    </tbody>
+    </table>
+{/if}
+
+
+{/block}
