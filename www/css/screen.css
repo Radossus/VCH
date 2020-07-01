@@ -39,15 +39,15 @@ body {
 
 }
 .navbar-nav{
-  /*  background-color: var(--third-color);
-    border-radius: 3px 3px; */
+  /*  background-color: var(--third-color); */
+    border-radius: 0px 10px;
 }
 
 ul.nav li a, ul.nav li a:visited {
-    color: var(--main-white) !important;
+  /*  color: var(--main-white) !important; */
     font-size: 1.4em;
-   /* margin-left: 0.1em; */
-    border-radius: 0px 10px;
+   /* margin-left: 0.1em;
+    border-radius: 0px 10px;*/
 }
 
 ul.nav li a:hover, ul.nav li a:active {
@@ -66,26 +66,37 @@ ul.nav li.active a {
     border-radius: 2px 50px 2px 50px;
 }
 
-#banner a:link {
+#banner-column li a:link {
     color: var(--link) !important;
     text-decoration: none;
 }
 
 /* visited link */
-#banner a:visited {
+#banner-column li a:visited {
     color: var(--link) !important;
+    padding-left: 0px;
 }
 
 /* mouse over link */
-#banner a:hover {
+#banner-column li a:hover {
     color: var(--third-color) !important;
     text-decoration: none !important;
-    padding-left: 5px;
 }
 
+#banner-column ul {
+    list-style-type: none;
+    padding-left: 0% !important;
+}
+
+
 /* selected link */
-#banner a:active {
+#banner-column li a:active {
     color: var(--link) !important;
+}
+
+.btn-warning a{
+    color: white !important;
+    text-decoration: none;
 }
 
 .bgPage a:link {
@@ -108,6 +119,7 @@ ul.nav li.active a {
 .bgPage a:active {
     color: var(--link) !important;
 }
+
 
 
 .carousel-inner {
@@ -195,15 +207,9 @@ ul.nav li.active a {
 }
 
 
-.responsive-iframe {
-    /*position: absolute;*/
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
+iframe {
+    max-width: 100% !important;
+    border: 0px;
 }
 
 

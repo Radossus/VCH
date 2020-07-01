@@ -26,7 +26,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $todayPlus->modify('+1 month');
         $this->template->pages = $this->database->table('pages')->order('created_at DESC');
         $this->template->mesta = $this->database->table('mesto')->order('mesto ASC');
-        $this->template->bannerDates = $this->database->table('terminy')->where('datum >= ? AND datum <= ?', $today, $todayPlus)->order('datum')->limit(11)->fetchAll();
+        $this->template->bannerDates = $this->database->table('terminy')->where('datum >= ?', $today)->order('datum')->limit(10)->fetchAll();
 
         $blogPosts = $this->database->table('post')->where('schvaleni = ?','Schváleno')->limit(3)->order('datum ASC')->fetchAll();
         $this->template->blogPosts = $blogPosts;

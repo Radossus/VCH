@@ -36,9 +36,10 @@
                     </div>
     				<ul>
     					{foreach $bannerDates as $termin}
-    					    <li><a href="{link Mesto:mesto $termin->mesto->url}">{$termin->datum|date:'j. n. Y'} {$termin->mesto->mesto}</a></li>
+    					    <li class="banner-column-link"><a href="{link Mesto:mesto $termin->mesto->url}">{$termin->datum|date:'j. n. Y'} {$termin->mesto->mesto}</a><a href="#" class="badge badge-warning ml-2 p-0"> <span data-feather="chevrons-right"></span></a></li>
     				    {/foreach}
     				</ul>
+    				<div class="btn btn-warning"><a href="#"><span data-feather="info" style="margin-top: -3px;"></span> Zobrazit všechny termíny</a></div>
     			</div>
     		</div>
     	</div>
@@ -59,16 +60,16 @@
                                     {if !isset($new->pic)} <!-- termin -->
                                        <span data-feather="calendar" style="margin-top: -5px;"></span> {$new->datum|date:'j. n. Y'}<br/>
                                        <span data-feather="clock" style="margin-top: -5px;"></span> {$new->datum|date:'H:i'}<br/>
-                                       <span data-feather="map-pin" style="margin-top: -5px;"></span> {$termin->mesto->mesto} <br/>
-                                       <span data-feather="flag" style="margin-top: -5px;"></span> {$termin->kde}
+                                       <span data-feather="map-pin" style="margin-top: -5px;"></span> {$new->mesto->mesto} <br/>
+                                       <span data-feather="flag" style="margin-top: -5px;"></span> {$new->kde}
                                     {/if}
                                     {if isset($new->obsah)} {$new->obsah|noescape|truncate:100} {/if}
                                 </p>
                                 <div>
                                   {if isset($new->url)}
-                                    <a n:href="Blog:post, $new->url" class="btn btn-primary">Číst více</a>
+                                    <a n:href="Blog:post, $new->url" class="btn btn-warning text-white">Číst více</a>
                                   {else}
-                                    <a n:href="Mesto:mesto, $new->mesto->url" class="btn btn-primary">Číst více</a>
+                                    <a n:href="Mesto:mesto, $new->mesto->url" class="btn btn-warning text-white">Číst více</a>
                                   {/if}
                                 </div>
                             </div>
