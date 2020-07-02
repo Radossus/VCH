@@ -6,8 +6,8 @@
 
 
     <div class="row pl-3">
-        <div class="col-md-9 bgPage p-3">
-            <div class="row">
+        <div class="col-md-9">
+            <div class="row bgPage p-2">
                     {foreach $terminy as $termin}
                         <div class="col-sm-6 col-lg-4 py-2">
                             <div class="card bgCard h-100">
@@ -20,7 +20,7 @@
                                             <li> <span data-feather="flag" style="margin-top: -5px;"></span> {$termin->kde}</li>
                                         </ul>
                                         <a type="button" n:href="Mesto:mesto, $termin->mesto->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
-                                </div>
+                                    </div>
                             </div>
                         </div>
                     {/foreach}

@@ -36,7 +36,7 @@
                     </div>
     				<ul>
     					{foreach $bannerDates as $termin}
-    					    <li class="banner-column-link"><a href="{link Mesto:mesto $termin->mesto->url}">{$termin->datum|date:'j. n. Y'} {$termin->mesto->mesto}</a><a href="#" class="badge badge-warning ml-2 p-0"> <span data-feather="chevrons-right"></span></a></li>
+    					    <li class="banner-column-link"><a href="{link Mesto:mesto $termin->mesto->url}">{$termin->datum|date:'j. n. Y'} {$termin->mesto->mesto}</a><a href="{link Mesto:mesto $termin->mesto->url}" class="badge badge-warning ml-2 p-0"> <span data-feather="chevrons-right"></span></a></li>
     				    {/foreach}
     				   </li>
     				</ul>
@@ -47,32 +47,36 @@
     	<div class='container'>
 
         {if hpNews}
-            <div class="row bgPage p-1 mt-3">
+            <div class="row bgPage p-2 mt-3">
                 {foreach $hpNews as $new}
                     <div class="col-sm-6 col-lg-4 py-2">
                         <div class="card bgCard h-100">
-                            {if isset($new->pic)} <img class="card-img-top cardImage" src="{$basePath}/upload/post/intro_pic/{$new->pic}">
+                            {if isset($new->pic)}
+                                <img class="card-img-top cardImage" src="{$basePath}/upload/post/intro_pic/{$new->pic}">
                             {else}
                                 <img class="card-img-top cardImage" src="{$basePath}/upload/termin/intro_pic/default_termin.jpg">
                             {/if}
-                            <div class="card-body">
-                                {if isset($new->nazev)} <h5 class="card-title">{$new->nazev} </h5> {/if}
-                                <p class="card-text">
+                            <div class="card-body d-flex flex-column">
                                     {if !isset($new->pic)} <!-- termin -->
-                                       <span data-feather="calendar" style="margin-top: -5px;"></span> {$new->datum|date:'j. n. Y'}<br/>
-                                       <span data-feather="clock" style="margin-top: -5px;"></span> {$new->datum|date:'H:i'}<br/>
-                                       <span data-feather="map-pin" style="margin-top: -5px;"></span> {$new->mesto->mesto} <br/>
-                                       <span data-feather="flag" style="margin-top: -5px;"></span> {$new->kde}
+                                     <ul class="list-unstyled mb-3">
+                                          <li><span data-feather="calendar" style="margin-top: -5px;"></span> {$new->datum|date:'j. n. Y'}</li>
+                                          <li><span data-feather="clock" style="margin-top: -5px;"></span> {$new->datum|date:'H:i'}</li>
+                                          <li> <span data-feather="map-pin" style="margin-top: -5px;"></span> {$new->mesto->mesto} </li>
+                                          <li><span data-feather="flag" style="margin-top: -5px;"></span> {$new->kde}</li>
+                                      </ul>
                                     {/if}
-                                    {if isset($new->obsah)} {$new->obsah|noescape|truncate:100} {/if}
-                                </p>
-                                <div>
+                                    {if isset($new->nazev)}
+                                        <h5 class="card-title">{$new->nazev} </h5>
+                                    {/if}
+                                    {if isset($new->obsah)}
+                                           <p>{$new->obsah|noescape|truncate:100}</p>
+                                    {/if}
                                   {if isset($new->url)}
-                                    <a n:href="Blog:post, $new->url" class="btn btn-lg btn-block btn-warning text-white">Číst více</a>
+                                    <a n:href="Blog:post, $new->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
                                   {else}
-                                    <a n:href="Mesto:mesto, $new->mesto->url" class="btn btn-lg btn-block btn-warning text-white">Číst více</a>
+                                    <a n:href="Mesto:mesto, $new->mesto->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
                                   {/if}
-                                </div>
+
                             </div>
                         </div>
                     </div>

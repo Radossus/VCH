@@ -188,6 +188,10 @@ ul.nav li.active a {
     height: 15rem;
 }
 
+.card-body li{
+    margin-bottom: 0.3em;
+}
+
 .bgCard{
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     border: 0px;
