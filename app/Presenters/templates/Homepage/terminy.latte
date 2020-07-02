@@ -1,0 +1,38 @@
+{block content}
+
+    <div class="w-100 p-3 bgPage">
+            <h1 n:block="title"><span data-feather="calendar" class="feather-1" style="margin-top: -7px;"></span> Termíny večerů chval v ČR</h1>
+    </div>
+
+
+    <div class="row pl-3">
+        <div class="col-md-9 bgPage p-3">
+            <div class="row">
+                    {foreach $terminy as $termin}
+                        <div class="col-sm-6 col-lg-4 py-2">
+                            <div class="card bgCard h-100">
+                                <img class="card-img-top cardImage" src="{$basePath}/upload/termin/intro_pic/default_termin.jpg">
+                                <div class="card-body  d-flex flex-column">
+                                        <ul class="list-unstyled mb-3">
+                                            <li> <span data-feather="calendar" style="margin-top: -5px;"></span> {$termin->datum|date:'j. n. Y'}</li>
+                                            <li> <span data-feather="clock" style="margin-top: -5px;"></span>{$termin->datum|date:'H:i'}</li>
+                                            <li> <span data-feather="map-pin" style="margin-top: -5px;"></span> {$termin->mesto->mesto} </li>
+                                            <li> <span data-feather="flag" style="margin-top: -5px;"></span> {$termin->kde}</li>
+                                        </ul>
+                                        <a type="button" n:href="Mesto:mesto, $termin->mesto->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
+                                </div>
+                            </div>
+                        </div>
+                    {/foreach}
+            </div>
+        </div>
+
+        <div class="col-md-3 ">
+            {foreach $mesta as $mesto}
+                <a type="button" n:href="Mesto:mesto, $mesto->url" class="btn btn-lg btn-block btn-light mb-3" >{$mesto->mesto}</a>
+            {/foreach}
+        </div>
+    </div>
+
+
+{/block}

@@ -1,9 +1,8 @@
 {block content}
-	<div class="row">
 		<div class="w-100 p-3 bgPage">
 			<h1 n:block="title">Večery chval online</h1>
 		</div>
-	</div>
+
 
 	{if $terminy}
 
@@ -25,11 +24,9 @@
 			</div>
 		{/foreach}
 	{else}
-		<div class="row">
-			<div class="w-100 p-3 bgPage">
-				<p>V tuto chvíli nejsou vypsané žádne online termíny večerů chval.</p>
-			</div>
-		</div>
+	<div class="w-100 p-3 bgPage">
+		<p>V tuto chvíli nejsou vypsané žádne online termíny večerů chval.</p>
+	</div>
 	{/if}
 
 

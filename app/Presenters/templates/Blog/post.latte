@@ -1,36 +1,34 @@
 {block content}
-    <div class="row">
-        <div class="w-100 p-3 bgPage">
-            <h1><span data-feather="book-open" style="margin-top: -5px;" class="feather-1"></span> Blog</h1>
-        </div>
+    <div class="w-100 p-3 bgPage">
+         <h1><span data-feather="book-open" style="margin-top: -5px;" class="feather-1"></span> Blog</h1>
     </div>
+
     {if $post}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 bgPage p-3" id="termin">
+                    <h2 n:block="title">{$post->nazev}</h2>
+                    <div>
+                        <span data-feather="calendar" style="margin-top: -5px;"></span> {$post->datum|date:'j. n. Y'}
+                        <span class="float-right"><span data-feather="user" style="margin-top: -5px;"></span> {$post->autor}</span>
+                    </div>
+                    <div class="mt-5">
+                        {$post->obsah|noescape}
+                    </div>
 
-    <div class="row">
-        <div class="col-md-9 bgPage p-5" id="termin">
-            <h2 n:block="title">{$post->nazev}</h2>
-            <div>
-                <span data-feather="calendar" style="margin-top: -5px;"></span> {$post->datum|date:'j. n. Y'}
-                <span class="float-right"><span data-feather="user" style="margin-top: -5px;"></span> {$post->autor}</span>
+                </div>
+                <div class="col-md-3 bgPage p-3" style="border-left: 1px solid; border-color: rgba(0, 0, 0, 0.2) !important">
+                    <h5>Další příspěvky</h5>
+                    <ul class="ml-3 mt-3">
+                    {foreach $allPosts as $allPost}
+                        {if $allPost->url != $post->url}
+                            <li><a n:href="Blog:post, $allPost->url">{$allPost->nazev}</a></li>
+                        {/if}
+                    {/foreach}
+                    <ul>
+                </div>
             </div>
-            <div class="mt-5">
-                {$post->obsah|noescape}
-            </div>
-
         </div>
-        <div class="col-3 bgPage p-5" style="border-left: 1px solid; border-color: rgba(0, 0, 0, 0.2) !important">
-            <h5>Další příspěvky</h5>
-            <ul class="ml-3 mt-3">
-            {foreach $allPosts as $allPost}
-                {if $allPost->url != $post->url}
-                    <li><a n:href="Blog:post, $allPost->url">{$allPost->nazev}</a></li>
-                {/if}
-            {/foreach}
-            <ul>
-
-        </div>
-
-    </div>
     {else}
         <h2>Příspěvek neexistuje!</h2>
     {/if}

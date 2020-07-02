@@ -38,15 +38,16 @@
     					{foreach $bannerDates as $termin}
     					    <li class="banner-column-link"><a href="{link Mesto:mesto $termin->mesto->url}">{$termin->datum|date:'j. n. Y'} {$termin->mesto->mesto}</a><a href="#" class="badge badge-warning ml-2 p-0"> <span data-feather="chevrons-right"></span></a></li>
     				    {/foreach}
+    				   </li>
     				</ul>
-    				<div class="btn btn-warning"><a href="#"><span data-feather="info" style="margin-top: -3px;"></span> Zobrazit všechny termíny</a></div>
+                     <div class="btn btn-block btn-warning"><a n:href="Homepage:terminy"><span data-feather="info" style="margin-top: -3px;"></span> Všechny termíny</div>
     			</div>
     		</div>
     	</div>
-    	<div class='container mt-3'>
+    	<div class='container'>
 
         {if hpNews}
-            <div class="row">
+            <div class="row bgPage p-1 mt-3">
                 {foreach $hpNews as $new}
                     <div class="col-sm-6 col-lg-4 py-2">
                         <div class="card bgCard h-100">
@@ -67,9 +68,9 @@
                                 </p>
                                 <div>
                                   {if isset($new->url)}
-                                    <a n:href="Blog:post, $new->url" class="btn btn-warning text-white">Číst více</a>
+                                    <a n:href="Blog:post, $new->url" class="btn btn-lg btn-block btn-warning text-white">Číst více</a>
                                   {else}
-                                    <a n:href="Mesto:mesto, $new->mesto->url" class="btn btn-warning text-white">Číst více</a>
+                                    <a n:href="Mesto:mesto, $new->mesto->url" class="btn btn-lg btn-block btn-warning text-white">Číst více</a>
                                   {/if}
                                 </div>
                             </div>
@@ -78,8 +79,4 @@
                 {/foreach}
             </div>
         {/if}
-
-
-
-
 {/block}

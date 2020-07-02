@@ -61,32 +61,12 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         return ($a['datum'] > $b['datum'])? 1: -1;
     }
 
-    /*
-    public function renderMesto(String $url, String $page=NULL): void
-    {
-        $this->template->stranaMesta = NULL;
 
-
-        $this->template->mesta = $this->database->table('mesto')->order('mesto ASC');
-        $mesto = $this->database->table('mesto')->where('url ?',$url)->fetch();
-        $this->template->jmenoMesta = $mesto->mesto;
-        $this->template->urlMesta = $mesto->url;
-        $this->template->stranky_mesta = $this->database->table('stranky_mesta')->where('mesto_id ?',$mesto->id)->fetchAll();
-        $this->template->terminy = $this->database->table('terminy')->where('mesto_id ? AND datum >= ?',$mesto->id, new Datetime())->fetchAll();
-        if($page){
-            $this->template->stranaMesta = $this->database->table('stranky_mesta')->where('mesto_id ? AND url ?', $mesto->id, $page)->fetch();
-        }
-    }
-*/
     public function renderMapa(): void
     {
         $this->template->mesta = $this->template->mesta = $this->database->table('mesto')->group('mesto.id')->having('COUNT(:terminy.datum)>0')->order('mesto ASC')->fetchAll();
-      //  $this->template->terminyDnes = $this->database->table('terminy')->where(['DATE(datum) =' => new \Nette\Database\SqlLiteral('DATE(NOW())')])->fetchAll();
 
         $this->template->mestaAkce = $this->getMestaAkce();
-       // Debugger::dump($mesta->terminy->id);
-
-    // Debugger::dump($this->template->mestaDnes);
     }
 
     public function getMestaAkce()
@@ -126,5 +106,11 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->template->terminy = $this->database->table('terminy')->where('online',true)->order('datum ASC')->fetchAll();
     }
 
+    public function renderTerminy()
+    {
+        $today = new DateTime();
+        $this->template->terminy = $this->database->table('terminy')->where('datum >= ? ',$today)->order('datum')->fetchAll();
+        $this->template->mesta = $this->template->mesta = $this->database->table('mesto')->group('mesto.id')->having('COUNT(:terminy.datum)>0')->order('mesto ASC')->fetchAll();
+    }
     
 }
