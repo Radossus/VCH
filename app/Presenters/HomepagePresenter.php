@@ -24,6 +24,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $today = new DateTime();
         $todayPlus = new DateTime();
         $todayPlus->modify('+1 month');
+        $this->template->sliderItems = $this->database->table('slider')->where('zobrazit =?', 1)->order('poradi')->fetchAll();
         $this->template->pages = $this->database->table('pages')->order('created_at DESC');
         $this->template->mesta = $this->database->table('mesto')->order('mesto ASC');
         $this->template->bannerDates = $this->database->table('terminy')->where('datum >= ?', $today)->order('datum')->limit(10)->fetchAll();
@@ -39,18 +40,17 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         /* serazeni pole */
         usort($homeNews,[__CLASS__, 'sortByDatum']);
         $this->template->hpNews = $homeNews;
-        /*
-        foreach ($homeNews as $item) {
-           echo $item->datum .'<br>';
-            if (isset($item->kde) ){
-                echo $item->kde.'<br>';
-                $homeNews[]['novinka'] = 'termin';
-            }
-            if (isset($item->mesto->mesto) ){
-                echo $item->mesto->mesto.'<br>';
-            }
-        }
-        */
+
+        $dnes= new DateTime();
+     /*   echo $dnes->modify('+ 1 month')."<br>";
+
+        echo strtotime('now') ."<br>";
+        echo strtotime('10 September 2000');
+        echo strtotime('+1 day');
+        echo strtotime('+1 week');
+        echo strtotime('+1 week 2 days 4 hours 2 seconds');
+        echo strtotime('next Thursday');
+        echo strtotime('last Monday'); */
 
     }
 
@@ -106,11 +106,12 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->template->terminy = $this->database->table('terminy')->where('online',true)->order('datum ASC')->fetchAll();
     }
 
-    public function renderTerminy()
+    public function renderTerminy() : void
     {
         $today = new DateTime();
         $this->template->terminy = $this->database->table('terminy')->where('datum >= ? ',$today)->order('datum')->fetchAll();
         $this->template->mesta = $this->template->mesta = $this->database->table('mesto')->group('mesto.id')->having('COUNT(:terminy.datum)>0')->order('mesto ASC')->fetchAll();
     }
+
     
 }

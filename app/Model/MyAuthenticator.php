@@ -23,17 +23,11 @@ final class MyAuthenticator implements Nette\Security\IAuthenticator
     {
         [$username, $password] = $credentials;
 
-     //   Debugger::dump($username);
-     //   Debugger::dump($password);
-
         $row = $this->database->table('user')
             ->where('name', $username)->fetch();
 
-     //   Debugger::dump($row);
-
         if (!$row) {
             throw new Nette\Security\AuthenticationException('User not found.');
-          //  Debugger::dump('User not found.');
         }
 
         //if (!$this->passwords->verify($password, $row->password)) {

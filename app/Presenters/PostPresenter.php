@@ -76,11 +76,8 @@ final class PostPresenter extends BaseAdminPresenter
         $values['mesto_id'] = $this->userMestoId;
         $values['user'] = $this->getUser()->getIdentity()->username;
 
-        $filename = $this->uploadIntroPic($values['pic']);
+        $filename = $this->uploadIntroPic($values['pic'], $values['id']);
 
-        if($filename == null) {
-            $filename = 'default_article.jpg';
-        }
 
         $this->postManager->savePost($values,$filename);
 
@@ -105,11 +102,12 @@ final class PostPresenter extends BaseAdminPresenter
 
         if($values['id']){
             $this->flashMessage("Příspěvek byl úspěšně editován.", 'success');
+            $this->redirect('Post:editace', $values['id']);
         }else{
             $this->flashMessage("Příspěvek byl úspěšně přidán.", 'success');
+            $this->redirect('Administrace:post');
         }
 
-        //$this->redirect('Administrace:post');
 
     }
 
@@ -159,10 +157,13 @@ final class PostPresenter extends BaseAdminPresenter
         return $kat;
     }
 
-    public function uploadIntroPic($file)
+    public function uploadIntroPic($file, $id)
     {
         $httpRequest = $this->getHttpRequest();
         $basePathServer = $this->getHttpRequest()->getUrl()->getBasePath();
+        $fileName = null;
+        $defaultFileName = 'default_article.jpg';
+
 
         if($file->isImage() and $file->isOk())
         {
@@ -183,9 +184,22 @@ final class PostPresenter extends BaseAdminPresenter
             $image->sharpen();
             $image->save('upload/post/' . '/intro_pic/'. $fileName);
 
-            return $fileName;
+
+        }else
+        {
+            $row = $this->postManager->getPost($id);
+      //      Debugger::dump($row->pic);
+            if($row->pic != $defaultFileName &&  $row->pic != null)
+            {
+                $fileName = $row->pic;
+            }
+            else{
+                $fileName = $defaultFileName;
+            }
         }
 
+     //   Debugger::dump($fileName);
+        return $fileName;
     }
 
     public function actionRemoveIntroPic($id, $pic)

@@ -18,10 +18,10 @@
 <div id="wrapper">
 
 	<div class="container-fluid">
-	<div class="row bg-dark text-white p-3">
-			<div class="col-sm-8"></a><span class="display-4"">Administrace</span></div>
-			<div class="col-sm-4"><span class="float-right">Uživatel: {$userIdentity->username} <a n:href="Prihlaseni:out" class="btn btn-primary"><span data-feather="log-out"></span> Odhlášení</a></span></div>
-	</div>
+		<div class="row bg-dark text-white p-3">
+				<div class="col-sm-8"></a><span class="display-4"">Administrace</span></div>
+				<div class="col-sm-4"><span class="float-right">Uživatel: {$userIdentity->username} <a n:href="Prihlaseni:out" class="btn btn-primary"><span data-feather="log-out"></span> Odhlášení</a></span></div>
+		</div>
 	</div>
 
 
@@ -63,6 +63,18 @@
 								</a>
 							</li>
 							<li class="nav-item pb-1">
+								<a class="nav-link badge-info" n:href="Administrace:uzivatel">
+									<span data-feather="user"></span>
+									Uživatelé
+								</a>
+							</li>
+							<li class="nav-item pb-1">
+								<a class="nav-link badge-info" n:href="Administrace:slider">
+									<span data-feather="image"></span>
+									Slider
+								</a>
+							</li>
+							<li class="nav-item pb-1">
 								<a class="nav-link badge-info" n:href="Administrace:prehled">
 									<span data-feather="eye"></span>
 									Přehledy
@@ -83,8 +95,8 @@
 				</div>
 			</main>
 		</div> <!-- end row -->
-	</div>
 </div>
+
 
 
 	<!-- Icons -->
