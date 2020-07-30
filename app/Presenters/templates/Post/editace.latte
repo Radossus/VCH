@@ -5,6 +5,7 @@
 <form n:name=editorPost class="formDefault">
     {if $id}
         <div class="form-group">
+            <label n:name=datum class="">Zobrazení na homepage: </label>
             {if $schvaleni == "Čeká na schválení"}
                 <div class="form-control w-25 bg-primary text-white">{$schvaleni}</div>
             {elseif $schvaleni == "Schváleno"}

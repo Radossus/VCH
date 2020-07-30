@@ -12,44 +12,50 @@
 <body>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	<div class="container">
-		<nav class="navbar navbar-expand-lg mt-1 mb-1" id="navbar">
+	<div class="container p-0">
+		<nav class="navbar navbar-expand-lg mr-0" id="navbar">
 			<a class="navbar-brand" n:href="Homepage:">
 				<img src="{$basePath}/img/vch-logo.png" id="logo">
 			</a>
-			<button class="navbar-toggler navbar-light bg-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler navbar-light  bg-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="nav navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" n:href="Blog:default">
+						<a class="nav-link btn-info" n:href="Blog:default">
 							<span data-feather="book-open"></span>
 							Blog
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" n:href="Homepage:mapa">
+						<a class="nav-link btn-info" n:href="Homepage:mapa">
 							<span data-feather="map"></span>
 							Mapa
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" n:href="Homepage:online">
+						<a class="nav-link  btn-info" n:href="Homepage:online">
 							<span data-feather="youtube"></span>
 							Online
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" n:href="Homepage:strana,'materialy'">
+						<a class="nav-link  btn-info" n:href="Homepage:strana,'materialy'">
 							<span data-feather="tool"></span>
 							Materiály
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" n:href="Homepage:strana,'o-nas'">
+						<a class="nav-link  btn-info" n:href="Homepage:strana,'o-nas'">
 							<span data-feather="eye"></span>
 							O nás
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn-info" href="https://cs-cz.facebook.com/vecerychval.cz/">
+							<span data-feather="facebook"></span>
+							Facebook
 						</a>
 					</li>
 				</ul>
@@ -63,11 +69,19 @@
 		<div id="main-contend">
 			{include content}
 		</div>
+
+		<footer class="w-100 p-3 bgPage">
+			<div class="container">
+				<div class="btn btn-info"><span data-feather="key"></span><a n:href="Administrace:"> Přihlášení</a></div>
+				<div class="text-center text-white">&copy; 2020 | <a n:href="Homepage:"> www.vecerychval.cz</a></div>
+			</div>
+		</footer>
+
 	</div>
 
 
 
-	</div>
+
 
 	{block scripts}
 		<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>

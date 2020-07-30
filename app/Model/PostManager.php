@@ -101,7 +101,11 @@ class PostManager extends DatabaseManager
             'pic' => null
         ]);
 
-        unlink(self::FILE_DIR."intro_pic/".$pic);
+        if($pic != 'default_article.jpg'){
+
+            unlink(self::FILE_DIR."intro_pic/".$pic);
+        }
+
     }
 
     public function getPostsBySchvaleni($schvaneni)
@@ -157,22 +161,6 @@ class PostManager extends DatabaseManager
     {
         return $this->database->table('post_schvaleni')->where('post_id = ?', $idPost)->Select('id')->fetch();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function getTerminyBySchvaleni($homepage,$schvaleni=null)
     {

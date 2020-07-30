@@ -1,0 +1,132 @@
+{block content}
+
+<h1 n:block="title" class="text-secondary">{if $id} Editace {else} Vložení {/if} uživatele </h1>
+
+
+{if $id}
+    <form n:name="editUzivatel">
+        <div class="alert alert-danger" role="alert" n:if="$form->hasErrors()">
+            <span n:foreach="$form->errors as $error">{$error}</span>
+        </div>
+        <div class="formDefault">
+            <div class="form-group">
+                <label n:name=name class="">{label name}</label>
+                <input n:name=name class="form-control w-25">
+            </div>
+
+            <div class="form-group">
+                <label n:name=mesto_id class="">{label mesto_id}</label>
+                <select n:name=mesto_id class="form-control w-25"></select>
+            </div>
+
+            <div class="form-group">
+                <label n:name=role class="">{label role}</label>
+                <select n:name=role class="form-control w-25"></select>
+            </div>
+
+            <div class="form-group">
+                <label n:name=email class="">Email: </label>
+                <input n:name=email class="form-control w-25">
+            </div>
+            <div>
+                <a href="#" class="btn btn-danger" role="button" data-toggle="modal" data-target="#exampleModal">Změnit heslo</a>
+            </div>
+            <div class="form-group text-right">
+                <input n:name=send class="btn btn-primary">
+            </div>
+
+        </div>
+    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Změna hesla pro uživatele: {$name}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form n:name="zmenaHesla">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <input n:name=id value="{$id}" class="form-control w-25">
+                        </div>
+
+                        <div class="form-group">
+                            <label n:name=password class="">Heslo: </label>
+                            <input n:name=password class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label n:name=passwordVerify class="">Heslo znovu pro kontrolu: </label>
+                            <input n:name=passwordVerify class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zrušit</button>
+                        <input n:name=send class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{else}
+<form n:name=insertUzivatel>
+
+    <div class="alert alert-danger" role="alert" n:if="$form->hasErrors()">
+        <span n:foreach="$form->errors as $error">{$error}</span>
+    </div>
+    <div class="formDefault">
+        <div class="form-group">
+            <label n:name=name class="">{label name}</label>
+            <input n:name=name class="form-control w-25">
+        </div>
+
+        <div class="form-group">
+            <label n:name=mesto_id class="">{label mesto_id}</label>
+            <select n:name=mesto_id class="form-control w-25"></select>
+        </div>
+
+        <div class="form-group">
+        <label n:name=role class="">{label role}</label>
+        <select n:name=role class="form-control w-25"></select>
+        </div>
+
+        <div class="form-group">
+            <label n:name=email class="">Email: </label>
+            <input n:name=email class="form-control w-25">
+        </div>
+
+        <div class="form-group">
+            <label n:name=password class="">Heslo: </label>
+            <input n:name=password class="form-control w-25">
+        </div>
+
+        <div class="form-group">
+            <label n:name=passwordVerify class="">Heslo znovu pro kontrolu</label>
+            <input n:name=passwordVerify class="form-control w-25">
+        </div>
+
+        <div class="form-group text-right">
+            <input n:name=send class="btn btn-primary">
+        </div>
+    </div>
+</form>
+
+
+{/if}
+
+    <p><a n:href="Administrace:uzivatel">← zpět na výpis uživatelů</a></p>
+
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+
+
+{/block}

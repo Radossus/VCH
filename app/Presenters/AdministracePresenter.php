@@ -7,6 +7,8 @@ namespace App\Presenters;
 use App\Model\MestoManager;
 use App\Model\PostManager;
 use App\Model\TerminManager;
+use App\Model\SliderManager;
+use App\Model\UserManager;
 use Nette;
 use Nette\ComponentModel\IComponent;
 use Tracy\Debugger;
@@ -22,14 +24,26 @@ final class AdministracePresenter extends BaseAdminPresenter
     private $postManager;
     private $userMestoId;
     private $mestoManager;
+    private $sliderManager;
+    private $userManager;
 
-    public function __construct(Nette\Database\Context $database, TerminManager $terminManager, PostManager $postManager, MestoManager $mestoManager)
+    public function __construct(
+        Nette\Database\Context $database,
+        TerminManager $terminManager,
+        PostManager $postManager,
+        MestoManager $mestoManager,
+        SliderManager $sliderManager,
+        UserManager $userManager
+    )
+
     {
         parent::__construct();
         $this->database = $database;
         $this->terminManager = $terminManager;
         $this->postManager = $postManager;
         $this->mestoManager = $mestoManager;
+        $this->sliderManager = $sliderManager;
+        $this->userManager = $userManager;
     }
 
 
@@ -86,6 +100,16 @@ final class AdministracePresenter extends BaseAdminPresenter
     {
         $this->template->mesta = $this->mestoManager->getMesta();
        // Debugger::dump($this->mestoManager->getMesta());
+    }
+
+    public function renderSlider(): void
+    {
+        $this->template->sliderItems = $this->sliderManager->getSliderItems();
+    }
+
+    public function renderUzivatel(): void
+    {
+        $this->template->uzivatele = $this->userManager->getUsers();
     }
 
 }

@@ -1,0 +1,32 @@
+{block content}
+<h1 n:block="title" class="text-secondary">Správa slideru</h1>
+
+    <div class="pb-2"><a n:href="Slider:editace" class="btn btn-primary p-1"><span data-feather="plus-circle"></span> Vložit nový obrázek</a></div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Pořadí</th>
+                <th scope="col">Obrázek</th>
+                <th scope="col">Popisek</th>
+                <th scope="col">URL</th>
+                <th class="text-center" scope="col">Zobrazeno</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $sliderItems as $item}
+            <tr>
+                <th class="align-middle" scope="row">{$item->poradi}</th>
+                <td><img width="300" class="rounded" src="{$basePath}/upload/slider/{$item->pic|noescape}"></td>
+                <td class="align-middle">{$item->popisek}</td>
+                <td class="align-middle">{$item->url}</td>
+                <td class="text-center align-middle">{if $item->zobrazit == 1}ANO{else}NE{/if}</td>
+                <td class="align-middle"><a n:href="Slider:editace $item->id" class="btn btn-success"><span data-feather="edit"></span> Editovat</a></td>
+                <td class="align-middle"><a n:href="Slider:remove $item->id" class="btn btn-danger " onclick="return confirm('Opravdu chcete smazat Obrázek?')"><span data-feather="minus-circle"></span> Smazat</a></td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+
+{/block}

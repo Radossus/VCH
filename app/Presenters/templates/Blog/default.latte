@@ -6,31 +6,30 @@
 
     <div>
         {if $blogPosts}
-            <div class="row">
-
+            <div class="container">
+            <div class="row bgPage p-2">
                 {foreach $blogPosts as $post}
                     <div class="col-sm-6 col-lg-4 py-2">
-                        <div class="card bgCard h-100" style="display:none">
+                        <div class="card bgCard h-100">
                             <img class="card-img-top cardImage" src="{$basePath}/upload/post/intro_pic/{$post->pic}">
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{$post->nazev}</h5>
                                 <p class="card-text">{$post->obsah|noescape|truncate:100}</p>
-                                <a n:href="Blog:post, $post->url" class="btn btn-primary">Číst více</a>
+                                <a n:href="Blog:post, $post->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
                             </div>
                         </div>
                      </div>
                 {/foreach}
 
             </div>
+            </div>
         {/if}
-
     </div>
 
 
 <script type="text/javascript" >
 $(document).ready(function () {
         $(".card").delay("slow").fadeIn()
-    	console.log("stranka se nacetla.");
 });
 
 </script>
