@@ -8,13 +8,19 @@
 			<div class="col-md-9 bgPage p-5" id="termin">
 			{if $stranaMesta}
 				<h2>{$stranaMesta->nazev}</h2>
-				<p>{$stranaMesta->obsah|noescape}</p>
+				<div class="mb-5">{$stranaMesta->obsah|noescape}</div>
+			{else}
+                {if $strankaUvod}
+                    <h2>{$strankaUvod->nazev}</h2>
+                    <div class="mb-5">
+                    {$strankaUvod->obsah|noescape}
+                    </div>
+                {/if}
 			{/if}
 
 
+
 			{if $terminy}
-
-
 				<h2><span data-feather="calendar" style="margin-top: -10px;"></span> Nadcházející termíny: </h2>
 
 				{foreach $terminy as $termin}

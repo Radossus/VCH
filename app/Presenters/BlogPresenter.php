@@ -21,7 +21,7 @@ final class BlogPresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault(): void
     {
-        $this->template->blogPosts = $this->database->table('post')->order('datum ASC')->fetchAll();
+        $this->template->blogPosts = $this->database->table('post')->order('datum DESC')->fetchAll();
     }
 
     public function renderPost($url)

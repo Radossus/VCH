@@ -142,7 +142,7 @@ ul.nav li.active a {
 }
 
 #banner-column li {
-    font-size:1.2vw;
+    font-size: 1em;
 }
 
 
@@ -370,7 +370,7 @@ only screen and (min-width: 538px) and (max-width: 768px) {
 only screen and (min-width: 769px) {
 
     #banner-column li {
-        font-size:1.2vw;
+        font-size:1.2em;
     }
 
     ul.nav li a, ul.nav li a:visited {

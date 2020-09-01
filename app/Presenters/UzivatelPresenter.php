@@ -33,7 +33,8 @@ final class UzivatelPresenter extends BaseAdminPresenter
             ->setRequired('Prosím vyplňte jméno uživatele.');
 
         $form->addPassword('password', 'Jméno uživatele: ')
-            ->setRequired('Prosím vyplňte uživatelské heslo.');
+            ->setRequired('Prosím vyplňte uživatelské heslo.')
+            ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků!', 6);
 
         $form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
             ->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')
@@ -99,7 +100,8 @@ final class UzivatelPresenter extends BaseAdminPresenter
         $form->addGroup('Editace uživatele');
         $form->addHidden('id');
         $form->addPassword('password', 'Jméno uživatele: ')
-            ->setRequired('Prosím vyplňte uživatelské heslo.');
+            ->setRequired('Prosím vyplňte uživatelské heslo.')
+            ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků!', 6);
 
         $form->addPassword('passwordVerify', 'Heslo pro kontrolu: ')
             ->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')

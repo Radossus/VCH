@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="{$basePath}/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/cs.js"></script>
 </head>
@@ -16,11 +17,13 @@
 <body>
 
 <div id="wrapper">
-
+    <div class="bg-dark text-white  pl-3 pt-1"><a class="text-white text-decoration-none" n:href="Homepage:default" target="_blank"><span data-feather="globe"></span> Homepage vecerychval.cz </a></div>
 	<div class="container-fluid">
-		<div class="row bg-dark text-white p-3">
-				<div class="col-sm-8"></a><span class="display-4"">Administrace</span></div>
-				<div class="col-sm-4"><span class="float-right">Uživatel: {$userIdentity->username} <a n:href="Prihlaseni:out" class="btn btn-primary"><span data-feather="log-out"></span> Odhlášení</a></span></div>
+		<div class="row bg-dark text-white pl-3">
+				<div class="col-sm-8"></a><span class="display-4""><a class="text-white text-decoration-none" n:href="Administrace:default">Administrace</a></span></div>
+				<div class="col-sm-4"><span class="float-right">
+						<a n:href="UserProfile:default" class="text-white"><span class="rounded-circle bg-info  border border-light p-2 mr-1"><span  data-feather="user"></span></a>{$userIdentity->username} <a n:href="Prihlaseni:out" class="btn btn-primary"><span data-feather="log-out"></span> Odhlášení</a></span>
+				</div>
 		</div>
 	</div>
 

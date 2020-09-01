@@ -19,7 +19,7 @@
                                             <li> <span data-feather="map-pin" style="margin-top: -5px;"></span> {$termin->mesto->mesto} </li>
                                             <li> <span data-feather="flag" style="margin-top: -5px;"></span> {$termin->kde}</li>
                                         </ul>
-                                        <a type="button" n:href="Mesto:mesto, $termin->mesto->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
+                                        <a n:href="Mesto:mesto, $termin->mesto->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
                                     </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
 
         <div class="col-md-3 ">
             {foreach $mesta as $mesto}
-                <a type="button" n:href="Mesto:mesto, $mesto->url" class="btn btn-lg btn-block btn-warning mb-3" >{$mesto->mesto}</a>
+                <a n:href="Mesto:mesto, $mesto->url" class="btn btn-lg btn-block btn-warning mb-3" >{$mesto->mesto}</a>
             {/foreach}
         </div>
     </div>
