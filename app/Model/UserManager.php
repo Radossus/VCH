@@ -35,6 +35,13 @@ class UserManager extends DatabaseManager
         return $this->database->table(self::TABLE_NAME)->fetchAll();
     }
 
+    public function saveUserProfile($user)
+    {
+        $this->database->table(self::TABLE_NAME)->where(self::COLUMN_ID, $user[self::COLUMN_ID])->update([
+            'email' => $user['email']
+        ]);
+    }
+
     public function save($user)
     {
         $insert = null;
@@ -113,6 +120,20 @@ class UserManager extends DatabaseManager
     public static function hashPassword($password)
     {
         return md5($password);
+    }
+
+    public function checkPassword($id, $password)
+    {
+        $row = $this->database->table(self::TABLE_NAME)->where('id',$id)->fetch();
+
+        if($this->hashPassword($password ) != $row->password )
+        {
+            //throw new Nette\Security\AuthenticationException('Invalid password.');
+            // Debugger::dump('Invalid password');
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

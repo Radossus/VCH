@@ -28,9 +28,9 @@ final class MestoPresenter extends Nette\Application\UI\Presenter
         $mesto = $this->database->table('mesto')->where('url ?',$url)->fetch();
         $this->template->jmenoMesta = $mesto->mesto;
         $this->template->urlMesta = $mesto->url;
-       // $this->template->strankaUvod = $this->database->table('stranky_mesta')->where('mesto_id ? AND uvodni ?',$mesto->id, 'TRUE')->fetch();
+        $this->template->strankaUvod = $this->database->table('stranky_mesta')->where('mesto_id ? AND uvodni ?',$mesto->id, 'TRUE')->fetch();
         $this->template->stranky_mesta = $this->database->table('stranky_mesta')->where('mesto_id ?',$mesto->id)->fetchAll();
-        $this->template->terminy = $this->database->table('terminy')->where('mesto_id ? AND datum >= ?',$mesto->id, new Datetime())->fetchAll();
+        $this->template->terminy = $this->database->table('terminy')->where('mesto_id ? AND datum >= ?',$mesto->id, new Datetime())->order('datum ASC')->fetchAll();
         if($page){
             $this->template->stranaMesta = $this->database->table('stranky_mesta')->where('mesto_id ? AND url ?', $mesto->id, $page)->fetch();
         }

@@ -82,15 +82,6 @@ class TerminManager extends DatabaseManager
      */
     public function removeTermin($id)
     {
-        $pictures = $this->database->table(self::TABLE_NAME)->get($id);
-
-      //  Debugger::dump($pictures->pic1);
-       /* if($pictures->pic1){
-            unlink(self::FILE_DIR.$pictures->pic1);
-        }
-        if($pictures->pic2){
-            unlink(self::FILE_DIR.$pictures->pic2);
-        } */
 
         $this->database->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->delete();
     }
@@ -106,8 +97,10 @@ class TerminManager extends DatabaseManager
         $this->database->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->update([
             $pic => null
         ]);
+        if(file_exists(self::FILE_DIR.$termin[$pic])){
+            unlink(self::FILE_DIR.$termin[$pic]);
+        }
 
-        unlink(self::FILE_DIR.$termin[$pic]);
     }
 
     public function getTermin($id){

@@ -61,6 +61,12 @@ final class TerminPresenter extends BaseAdminPresenter
             'vyžadováno' => 'vyžadováno'
         ];
 
+        $opakovani = [
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
+        ];
+
+        $form->addSelect('opakovani','Počet opakování: ')->setItems($opakovani);
+
         $form->addCheckbox('online', ' Večer chval vysílán živě jako stream?');
 
         $form->addSelect('homepage', 'Vložit na úvodní stranu webu (poslat ke schválení): ')->setItems($volba);
@@ -75,7 +81,9 @@ final class TerminPresenter extends BaseAdminPresenter
 
         $values['mesto_id'] = $this->userMestoId;
 
-        $this->terminManager->saveTermin($values);
+        for ($i=0; $i <= $values['opakovani']; $i++){
+            $this->terminManager->saveTermin($values);
+        }
 
         if($values['homepage'] == 'vyžadováno' && ($values['schvaleni'] == 'Nevyžadováno' || $values['schvaleni'] =='')){
             $superadmin = $this->terminManager->getSuperAdmin();

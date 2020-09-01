@@ -46,7 +46,10 @@ class PostManager extends DatabaseManager
         $pictures = $this->database->table(self::TABLE_NAME)->get($id);
 
         if($pictures->pic){
-            unlink(self::FILE_DIR.'intro_pic/'.$pictures->pic);
+            $file_exists = file_exists(self::FILE_DIR.'intro_pic/'.$pictures->pic);
+            if($file_exists){
+                unlink(self::FILE_DIR.'intro_pic/'.$pictures->pic);
+            }
         }
 
         $this->database->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->delete();

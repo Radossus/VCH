@@ -189,13 +189,21 @@ final class PostPresenter extends BaseAdminPresenter
         {
             $row = $this->postManager->getPost($id);
       //      Debugger::dump($row->pic);
-            if($row->pic != $defaultFileName &&  $row->pic != null)
+
+            if($row){
+                if($row->pic != $defaultFileName &&  $row->pic != null)
+                {
+                    $fileName = $row->pic;
+                }
+                else{
+                    $fileName = $defaultFileName;
+                }
+            }else
             {
-                $fileName = $row->pic;
-            }
-            else{
                 $fileName = $defaultFileName;
             }
+
+
         }
 
      //   Debugger::dump($fileName);

@@ -111,5 +111,8 @@ final class AdministracePresenter extends BaseAdminPresenter
     {
         $this->template->uzivatele = $this->userManager->getUsers();
     }
+    public function userProfile(): void
+    {
 
+    }
 }

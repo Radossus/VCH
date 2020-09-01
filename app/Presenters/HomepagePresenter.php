@@ -39,18 +39,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
         /* serazeni pole */
         usort($homeNews,[__CLASS__, 'sortByDatum']);
-        $this->template->hpNews = $homeNews;
-
-        $dnes= new DateTime();
-     /*   echo $dnes->modify('+ 1 month')."<br>";
-
-        echo strtotime('now') ."<br>";
-        echo strtotime('10 September 2000');
-        echo strtotime('+1 day');
-        echo strtotime('+1 week');
-        echo strtotime('+1 week 2 days 4 hours 2 seconds');
-        echo strtotime('next Thursday');
-        echo strtotime('last Monday'); */
+        $this->template->hpNews = array_slice($homeNews, 0, 3); //pouze první tři prvky
 
     }
 
@@ -58,14 +47,15 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         if ( $a['datum'] == $b['datum'] ) {
             return 0;
         }
-        return ($a['datum'] > $b['datum'])? 1: -1;
+        return ($a['datum'] < $b['datum'])? 1: -1;
     }
 
 
     public function renderMapa(): void
     {
-        $this->template->mesta = $this->template->mesta = $this->database->table('mesto')->group('mesto.id')->having('COUNT(:terminy.datum)>0')->order('mesto ASC')->fetchAll();
-
+        $datum = new DateTime();
+        $datum->modify('-1 year');
+        $this->template->mesta = $this->database->table('mesto')->group('mesto.id')->where(':terminy.datum >= ?', $datum)->order('mesto ASC')->fetchAll();
         $this->template->mestaAkce = $this->getMestaAkce();
     }
 
@@ -112,6 +102,5 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->template->terminy = $this->database->table('terminy')->where('datum >= ? ',$today)->order('datum')->fetchAll();
         $this->template->mesta = $this->template->mesta = $this->database->table('mesto')->group('mesto.id')->having('COUNT(:terminy.datum)>0')->order('mesto ASC')->fetchAll();
     }
-
     
 }

@@ -9,6 +9,14 @@
     <span n:foreach="$form->errors as $error">{$error}</span>
     </div>
 
+    {if !$id}
+        <div class="form-group">
+                <label n:name="opakovani" class="">Počet opakování. (Termín bude vygenerován vícekrát se stejnými zadanými údaji, následně je nutné nastavit datumy.) </label>
+                <select n:name="opakovani" class="form-control w-25"></select>
+        </div>
+    {else}
+        <select n:name="opakovani" class="form-control w-25" style="display: none"></select>
+    {/if}
     <div class="form-group">
         <label n:name=datum class="">{label datum}</label>
         <input n:name=datum class="form-control w-25">

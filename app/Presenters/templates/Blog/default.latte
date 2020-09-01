@@ -1,9 +1,7 @@
 {block content}
-
     <div class="w-100 p-3 bgPage">
         <h1 n:block="title"><span data-feather="book-open" class="feather-1"></span> Blog</h1>
     </div>
-
     <div>
         {if $blogPosts}
             <div class="container">
@@ -14,25 +12,17 @@
                             <img class="card-img-top cardImage" src="{$basePath}/upload/post/intro_pic/{$post->pic}">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{$post->nazev}</h5>
-                                <p class="card-text">{$post->obsah|noescape|truncate:100}</p>
+                                <p class="card-text">
+                                {$post->obsah|stripHtml|truncate:100}</p>
                                 <a n:href="Blog:post, $post->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
                             </div>
                         </div>
                      </div>
                 {/foreach}
-
             </div>
             </div>
         {/if}
     </div>
-
-
-<script type="text/javascript" >
-$(document).ready(function () {
-        $(".card").delay("slow").fadeIn()
-});
-
-</script>
 {/block}
 
 

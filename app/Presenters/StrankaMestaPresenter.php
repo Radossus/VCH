@@ -41,7 +41,7 @@ class StrankaMestaPresenter extends BaseAdminPresenter
 
         $form->addTextArea('obsah', 'Obsah stránky:',null,25);
 
-        $form->addCheckbox('uvodni', 'Zobrazit jako první stránku?');
+        $form->addCheckbox('uvodni', ' Zobrazit jako první stránku');
 
         $form->addSubmit('send', 'Uložit');
 

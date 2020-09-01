@@ -46,7 +46,7 @@
     					{foreach $bannerDates as $termin}
     					    <li class="banner-column-link"><a href="{link Mesto:mesto $termin->mesto->url}">{$termin->datum|date:'j. n. Y'} {$termin->mesto->mesto}</a><a href="{link Mesto:mesto $termin->mesto->url}" class="badge ml-2 p-0"> <span data-feather="chevrons-right"></span></a></li>
     				    {/foreach}
-    				    <li><a n:href="Homepage:terminy"><span data-feather="info" style="margin-top: -3px;"></span> Všechny termíny</li>
+    				    <li><a n:href="Homepage:terminy"><span data-feather="info" style="margin-top: -3px;"></span> Všechny termíny</a></li>
     				</ul>
     			</div>
     		</div>
@@ -76,7 +76,7 @@
                                         <h5 class="card-title">{$new->nazev} </h5>
                                     {/if}
                                     {if isset($new->obsah)}
-                                           <p>{$new->obsah|noescape|truncate:100}</p>
+                                           <p>{$new->obsah|stripHtml|truncate:100}</p>
                                     {/if}
                                   {if isset($new->url)}
                                     <a n:href="Blog:post, $new->url" class="align-self-end btn btn-lg btn-block btn-warning text-white" style="margin-top: auto;">Číst více</a>
