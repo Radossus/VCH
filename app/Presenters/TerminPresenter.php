@@ -153,11 +153,10 @@ final class TerminPresenter extends BaseAdminPresenter
                     'online' => $termin['online']
                 ]);
             }
-            $this->template->schvaleni = $termin['schvaleni'];
+          //  $this->template->schvaleni = $termin['schvaleni'];
+            $this->template->schvaleni = 'nevyžadováno';
             $this->template->id = $id;
             $this->template->linkGenerator = $this->linkGenerator->link('Termin:upload',['mesto_id' => $this->userMestoId,'adresar' => 'termin' ]);
-     //   Debugger::dump($this->getHttpRequest()->getUrl()->getBasePath());
-
     }
 
 

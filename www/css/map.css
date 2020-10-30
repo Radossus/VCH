@@ -59,7 +59,7 @@
 } */
 @keyframes Map-pin-animation {
     0%   {color: var(--third-color); }
-    100%  {color: red; width: 1.8em; height: 1.8em}
+    100%  {color: var(--main-blue); width: 1.8em; height: 1.8em}
 }
 
 .map-pin-action {

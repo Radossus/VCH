@@ -29,7 +29,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->template->mesta = $this->database->table('mesto')->order('mesto ASC');
         $this->template->bannerDates = $this->database->table('terminy')->where('datum >= ?', $today)->order('datum')->limit(10)->fetchAll();
 
-        $blogPosts = $this->database->table('post')->where('schvaleni = ?','Schváleno')->limit(3)->order('datum ASC')->fetchAll();
+        $blogPosts = $this->database->table('post')->where('schvaleni = ?','Schváleno')->order('datum ASC')->fetchAll();
         $this->template->blogPosts = $blogPosts;
 
         $schvaleneTerminy = $this->database->table('terminy')->where('schvaleni = ? AND homepage ? AND DATUM >= ?','schvaleno','vyžadováno',$today)->order('datum ASC')->fetchAll();
@@ -40,7 +40,6 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         /* serazeni pole */
         usort($homeNews,[__CLASS__, 'sortByDatum']);
         $this->template->hpNews = array_slice($homeNews, 0, 3); //pouze první tři prvky
-
     }
 
     function sortByDatum($a, $b) {
@@ -93,7 +92,8 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
     public function renderOnline(): void
     {
-        $this->template->terminy = $this->database->table('terminy')->where('online',true)->order('datum ASC')->fetchAll();
+        $today = new DateTime();
+        $this->template->terminy = $this->database->table('terminy')->where('online = ? AND datum >= ? ',true,$today)->order('datum ASC')->fetchAll();
     }
 
     public function renderTerminy() : void
